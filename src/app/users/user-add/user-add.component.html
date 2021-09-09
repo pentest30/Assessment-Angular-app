@@ -1,0 +1,44 @@
+<div style="width: 300;">
+    <h6 mat-dialog-title>{{modalTitle}}</h6>
+    <div>
+        <form class="form-form m-5" [formGroup]="form">
+          
+            <div>
+                <mat-form-field >
+                    <mat-label>Username </mat-label>
+                    <input autocomplete="off" matInput formControlName="userName"  required>
+
+                    <mat-error *ngIf="form.get('userName').hasError('required')">
+                        userName is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field >
+                    <mat-label>Password </mat-label>
+                    <input matInput autocomplete="off" formControlName="password" type="password"  required>
+
+                    <mat-error *ngIf="form.get('password').hasError('required')">
+                        password is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+            
+                <mat-form-field class="full-width">
+                <mat-select formControlName="role" placeholder="select a role ...">
+                    
+                    <mat-option *ngFor="let item of roles" [value]="item.name">{{item.name}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+            <div class="text-left">
+                <button mat-raised-button   color="primary" style="margin-right:2px;" 
+                    (click)="save()">Save </button>
+                <button style="margin-left:2px;" mat-raised-button color="default" (click)="close()">Close
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

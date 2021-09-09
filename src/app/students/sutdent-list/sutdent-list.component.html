@@ -1,0 +1,77 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+    <div fxFlex="95%">
+  
+      <mat-card>
+        <mat-card-content>
+          <h2>Students</h2>
+  
+          <table mat-table [dataSource]="dataSource" matSort>
+  
+           
+            <!-- Name Column -->
+            <ng-container matColumnDef="firstName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+            </ng-container>
+            <ng-container matColumnDef="lastName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Last name </th>
+                <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+              </ng-container>
+              <ng-container matColumnDef="birthDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Brith date</th>
+                <td mat-cell *matCellDef="let element"> {{element.birthDate}} </td>
+              </ng-container>
+            <!-- Weight Column -->
+            <ng-container matColumnDef="speciality">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Speciality </th>
+              <td mat-cell *matCellDef="let element"> {{element.speciality}} </td>
+            </ng-container>
+          
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="schoolYear">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> School year </th>
+              <td mat-cell *matCellDef="let element"> {{element.schoolYear}} </td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Statut </th>
+                <td mat-cell *matCellDef="let element">
+                    <span class="label bg-red shadow-style" *ngIf="element.status == 2">Rjected</span>
+                    <span class="label bg-green shadow-style" *ngIf="element.status == 1">Active</span>
+                    <span class="label bg-orange shadow-style" *ngIf="element.status == 0">Waiting</span>                                    
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>
+                  Actions
+                </th>
+      
+                <td mat-cell *matCellDef="let row" >
+      
+                  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Click to see more actions">
+                    <i class="material-icons">more_vert</i>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                   
+                   
+                   
+                    <button *ngIf="role&& row.status ==0"  mat-menu-item (click)="validate(row)">
+                        <mat-icon aria-label="Edit">check</mat-icon> Validate
+                      </button>
+                      <button *ngIf="role&&row.status ==0"  mat-menu-item (click)="deactivate(row)">
+                        <mat-icon aria-label="Edit">clear</mat-icon> Reject
+                      </button>
+                  
+                    
+                  </mat-menu>
+                </td>
+              </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          
+        </mat-card-content>
+      </mat-card>
+  
+    </div>
+  </div>
